@@ -4,11 +4,19 @@
     "type": "set_block",
     "translate": [0, 1, 0],
     "predicate": {
-      "type": "minecraft:would_survive",
-      "state": {
-        "Name": "minecraft:short_grass",
-        "Properties": {}
-      }
+      "type": "minecraft:all_of",
+      "predicates": [
+        {
+          "type": "minecraft:replaceable"
+        },
+        {
+          "type": "minecraft:would_survive",
+          "state": {
+            "Name": "minecraft:short_grass",
+            "Properties": {}
+          }
+        }
+      ]
     },
     "block": {
       "type": "minecraft:simple_state_provider",
