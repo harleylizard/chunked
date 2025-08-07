@@ -30,7 +30,6 @@ public final class QueuedComponent implements ComponentV3, ServerTickingComponen
         if (ticks % 20 == 0 && !queue.isEmpty() && chunk instanceof LevelChunk levelChunk) {
             queue.poll().run((ServerLevel) levelChunk.getLevel(), time);
         }
-
     }
 
     @Override
