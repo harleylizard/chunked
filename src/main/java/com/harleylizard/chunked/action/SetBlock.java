@@ -10,11 +10,13 @@ import net.minecraft.world.level.chunk.status.ChunkStatus;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 
-public record SetBlock(BlockPredicate predicate, BlockStateProvider block) implements Action {
-    public static final MapCodec<SetBlock> CODEC = RecordCodecBuilder.mapCodec(builder -> builder.group(BlockPredicate.CODEC.fieldOf("predicate").orElse(BlockPredicate.alwaysTrue()).forGetter(SetBlock::predicate), BlockStateProvider.CODEC.fieldOf("block").forGetter(SetBlock::block)).apply(builder, SetBlock::new));
+public record SetBlock(BlockPos translate, BlockPredicate predicate, BlockStateProvider block) implements Action {
+    public static final MapCodec<SetBlock> CODEC = RecordCodecBuilder.mapCodec(builder -> builder.group(BlockPos.CODEC.fieldOf("translate").orElse(BlockPos.ZERO).forGetter(SetBlock::translate), BlockPredicate.CODEC.fieldOf("predicate").orElse(BlockPredicate.alwaysTrue()).forGetter(SetBlock::predicate), BlockStateProvider.CODEC.fieldOf("block").forGetter(SetBlock::block)).apply(builder, SetBlock::new));
 
     @Override
     public void run(ServerLevel level, BlockPos blockPos, RandomSource random) {
+        blockPos = blockPos.offset(translate);
+
         var chunk = level.getChunk(blockPos.getX() >> 4, blockPos.getZ() >> 4, ChunkStatus.FULL, false);
         if (chunk != null && predicate.test(level, blockPos)) {
 

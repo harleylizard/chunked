@@ -1,0 +1,22 @@
+{
+  "block": "minecraft:grass_block",
+  "action": {
+    "type": "set_block",
+    "translate": [0, 1, 0],
+    "predicate": {
+      "type": "minecraft:would_survive",
+      "state": {
+        "Name": "minecraft:short_grass",
+        "Properties": {}
+      }
+    },
+    "block": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "minecraft:short_grass",
+        "Properties": {}
+      }
+    }
+  },
+  "probability": 60
+}

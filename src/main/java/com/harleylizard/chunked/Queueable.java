@@ -21,7 +21,7 @@ public final class Queueable implements Comparable<Queueable> {
 
     public void run(ServerLevel level, LevelChunk chunk, long time) {
         var seconds = (int) (level.getDayTime() - time) / 20;
-        if (seconds == 0) {
+        if (seconds <= 0) {
             return;
         }
         var random = level.getRandom();
@@ -41,7 +41,8 @@ public final class Queueable implements Comparable<Queueable> {
                     var y = ((j / 16) % 16) + (i << 4);
                     var z = (j / (16 * 16)) + (pos.z << 4);
 
-                    if (chunk.getBlockState(blockPos.set(x, y, z)).is(block)) {
+                    var probability = (task.probability() * (16 * 16 * 16)) / seconds;
+                    if (random.nextInt(probability + 1) == 0 && chunk.getBlockState(blockPos.set(x, y, z)).is(block)) {
                         task.action().run(level, blockPos, random);
                     }
                 }
