@@ -5,6 +5,7 @@ import com.google.gson.JsonElement;
 import com.harleylizard.chunked.action.Action;
 import com.mojang.serialization.JsonOps;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerChunkEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 import net.minecraft.resources.ResourceLocation;
 import org.ladysnake.cca.api.v3.chunk.ChunkComponentFactoryRegistry;
@@ -49,6 +50,10 @@ public final class Chunked implements ModInitializer, ChunkComponentInitializer 
                 throw new RuntimeException(e);
             }
         });
+
+        ServerChunkEvents.CHUNK_UNLOAD.register((level, chunk) -> chunk.getComponent(QUEUED).time = level.dayTime());
+
+        ServerChunkEvents.CHUNK_LOAD.register((level, chunk) -> chunk.getComponent(QUEUED).all());
     }
 
     @Override

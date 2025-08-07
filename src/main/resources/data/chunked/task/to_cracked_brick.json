@@ -2,13 +2,6 @@
   "block": "minecraft:stone_bricks",
   "action": {
     "type": "set_block",
-    "predicate": {
-      "type": "minecraft:would_survive",
-      "state": {
-        "Name": "minecraft:cracked_stone_bricks",
-        "Properties": {}
-      }
-    },
     "block": {
       "type": "minecraft:simple_state_provider",
       "state": {
@@ -16,6 +9,5 @@
         "Properties": {}
       }
     }
-  },
-  "priority": 0
+  }
 }
