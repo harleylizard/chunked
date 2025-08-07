@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "chunked",
+  "version": "1.0",
+  "name": "Chunked",
+  "description": "",
+  "authors": [
+    "harleylizard"
+  ],
+  "contact": {
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/chunked",
+    "sources": "https://github.com/harleylizard/chunked"
+  },
+  "license": "All Rights Reserved",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.harleylizard.chunked.Chunked"
+    ],
+    "cardinal-components": [
+      "com.harleylizard.chunked.Chunked"
+    ]
+  },
+  "mixins": [
+  ],
+  "depends": {
+    "fabricloader": ">=0.16.14",
+    "minecraft": "~1.21.1",
+    "java": ">=21",
+    "fabric-api": "*",
+    "cardinal-components-base": "*",
+    "cardinal-components-chunk": "*"
+  },
+  "suggests": {
+    "another-mod": "*"
+  },
+  "custom": {
+    "cardinal-components": [
+      "chunked:queued"
+    ]
+  }
+}
